@@ -71,87 +71,53 @@ const bindControllers = function(branch, app)
 {   
 
     app.use(menuParser);
-    app.get('/:qname', (req, res, next) => {
-        const qname = req.params.qname;
-        q = r.menuItems(branch, qname);
-        q.then(data => {
-            res.data = data;
-            next()
-        });
+    app.get('/:slug', (req, res, next) => {
+
+        r.item(branch, req.params.slug).then(data => {
+            r.menuItems(branch, data.item[0]._qname).then(data => {
+                res.data = data;
+                next()
+            }).catch(() => {});;
+        }).catch(() => {});;
     }, menuParser, (req, res, next) => {
             res.render('index', { menu: res.data });
         });
 
-    // app.get('/child-1/:slug', (req, res, next) => {
-    //     const slug = req.params.slug;
-    //     const q = r.item(branch, slug);
-    //     q.then(data => {
-    //         let qname = '';
-    //         if(data.item[0].contentType == 'article'){
-    //             qname = data.item[0].article.qname
-    //         }
-
-    //         if(data.item[0].contentType == 'category'){
-    //             qname = data.item[0].category.qname
-    //         }
-    //         r.breadcrumb(branch, qname).then(d => {
-                
-    //             data.breadcrumb = d;
-    //             //@todo We need better logic here
-    //             data.item = d.item;
-    //             res.data = data;
-    //             next();
-    //         })
-            
-    //     })
-    // }, breadcrumbParser, (req, res, next) => {
-    //     res.render('page', { data: res.data });
-    //     //res.json(res.data);
-    // })
-
     app.get('/child-2/:slug', (req, res, next) => {
         const slug = req.params.slug;
-        const q = r.item(branch, slug);
-        q.then(data => {
+        r.item(branch, slug).then(data => {
             r.breadcrumb(branch, data.item[0]._qname).then(d => {
                 data.breadcrumb = d;
                 res.data = data;
                 next();
-            })
-            
-        })
+            }).catch(() => {});; 
+        }).catch(() => {});
     }, breadcrumbParser, (req, res, next) => {
         res.render('page', { data: res.data });
         //res.json(res.data);
     });
 
     app.get('/child-1/:slug', (req, res, next) => {
-        const slug = req.params.slug;
-        const q = r.item(branch, slug);
-        q.then(data => {
+        r.item(branch, req.params.slug).then(data => {
             r.breadcrumb(branch, data.item[0]._qname).then(d => {
                 data.breadcrumb = d;
                 res.data = data;
                 next();
-            })
-            
-        })
+            }).catch(() => {});      
+        }).catch(() => {});
     }, breadcrumbParser, (req, res, next) => {
         res.render('page', { data: res.data });
         //res.json(res.data);
     });
 
     app.get('/child-1/child-of-child-1/:slug', (req, res, next) => {
-        const slug = req.params.slug;
-        const q = r.item(branch, slug);
-        q.then(data => {
+        r.item(branch, req.params.slug).then(data => {
             r.breadcrumb(branch, data.item[0]._qname).then(d => {
                 data.breadcrumb = d;
                 res.data = data;
                 next();
-            })
-            
-        })
+            }).catch(() => {});
+        }).catch(() => {});
     }, breadcrumbParser, (req, res, next) => {
         res.render('page', { data: res.data });
         //res.json(res.data);
