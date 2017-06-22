@@ -1,0 +1,7 @@
+{
+    "title": "Article 1",
+    "slug": "article-1",
+    "leadParagraph": "This is a lead paragraph. Not very long though",
+    "body": "This is the body of the article #1. I am not very inspired, so I guess this is long enough",
+    "_type": "custom:article"
+}

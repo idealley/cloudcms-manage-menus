@@ -1,0 +1,10 @@
+{
+    "title": "Menu association",
+    "description": "Associate content with a menu item. ",
+    "type": "object",
+    "properties": {},
+    "_parent": "a:linked",
+    "_type": "d:association",
+    "_qname": "a:menu-association",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

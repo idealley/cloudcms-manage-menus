@@ -1,0 +1,6 @@
+{
+    "title": "Main Menu",
+    "slug": "main-menu",
+    "_type": "custom:menu",
+    "root": true
+}

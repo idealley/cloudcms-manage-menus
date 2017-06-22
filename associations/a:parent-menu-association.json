@@ -1,0 +1,10 @@
+{
+    "title": "Menu Parent Item",
+    "description": "Associates two menu items with a parent child association. We set the parent association as it is more logical. First you create the parent, then while creating the child you can add its parent",
+    "type": "object",
+    "properties": {},
+    "_parent": "a:linked",
+    "_type": "d:association",
+    "_qname": "a:parent-menu-association",
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

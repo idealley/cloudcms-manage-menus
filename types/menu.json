@@ -1,0 +1,122 @@
+{
+    "title": "Menu",
+    "description": "This type is used to managed menu on the website",
+    "type": "object",
+    "_type": "d:type",
+    "_qname": "custom:menu",    
+    "properties": {
+        "title": {
+            "title": "Title",
+            "type": "string"
+        },
+        "slug": {
+            "title": "Slug / Alias",
+            "type": "string"
+        },
+        "root": {
+            "type": "boolean",
+            "title": "Root Menu definition",
+            "default": false
+        },
+        "type": {
+            "title": "type",
+            "type": "string",
+            "enum": [
+                "visible",
+                "hidden"
+            ],
+            "default": "visible"
+        },
+        "ordering": {
+            "title": "ordering",
+            "type": "string",
+            "enum": [
+                "a-z",
+                "z-a",
+                "order"
+            ]
+        },
+        "order": {
+            "type": "integer",
+            "title": "Display Order"
+        },
+        "parent": {
+            "title": "Parent menu item",
+            "type": "object",
+            "_relator": {
+                "associationType": "a:parent-menu-association",
+                "nodeType": "custom:menu"
+            },
+            "properties": {}
+        },
+        "contentType": {
+            "title": "Content Type",
+            "type": "string",
+            "enum": [
+                "article",
+                "category"
+            ],
+            "default": "article"
+        },
+        "article": {
+            "title": "Article",
+            "type": "object",
+            "_relator": {
+                "associationType": "a:menu-association",
+                "nodeType": "custom:article",
+                "mappings": [
+                    {
+                        "from": "target",
+                        "fromProperty": "slug",
+                        "toProperty": "./slug"
+                    },
+                    {
+                        "from": "source",
+                        "fromProperty": "_doc",
+                        "toProperty": "parent_doc"
+                    }
+                ]
+            },
+            "properties": {}
+        },
+        "category": {
+            "title": "Category",
+            "type": "object",
+            "_relator": {
+                "associationType": "a:menu-association",
+                "nodeType": "custom:category",
+                "mappings": [
+                    {
+                        "from": "target",
+                        "fromProperty": "slug",
+                        "toProperty": "./slug"
+                    },
+                    {
+                        "from": "source",
+                        "fromProperty": "_doc",
+                        "toProperty": "parent_doc"
+                    }
+                ]
+            },
+            "properties": {}
+        }
+    },
+    "dependencies": {
+        "category": [
+            "contentType"
+        ],
+        "article": [
+            "contentType"
+        ],
+        "order": [
+            "ordering"
+        ]
+    },
+    "_parent": "n:node",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "required": [
+        "title",
+        "slug"
+    ],
+    "items": {}
+}

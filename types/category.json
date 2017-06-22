@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "_parent": "n:node",
+    "_type": "d:type",
+    "_qname": "custom:category",    
+    "description": "A category",
+    "properties": {
+        "title": {
+            "title": "Title",
+            "type": "string"
+        },
+        "slug": {
+            "title": "Slug / Alias",
+            "type": "string"
+        },
+        "body": {
+            "title": "Body",
+            "type": "string"
+        }
+    },
+    "required": [
+        "title",
+        "slug"
+    ],
+    "title": "Category",
+    "type": "object"
+}

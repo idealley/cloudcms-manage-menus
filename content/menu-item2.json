@@ -1,0 +1,7 @@
+{
+    "title": "Child 2",
+    "slug": "child-2",
+    "type": "visible",
+    "_type": "custom:menu",
+    "root": false
+}

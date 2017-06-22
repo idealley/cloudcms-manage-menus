@@ -1,0 +1,26 @@
+{
+    "engineId": "alpaca1",
+    "title": "Category",
+    "fields": {
+        "title": {
+            "type": "text",
+            "label": "Title",
+            "required": true
+        },
+        "slug": {
+            "type": "slug",
+            "emptyOnly": true,
+            "label": "Slug / Alias",
+            "required": true
+        },
+        "body": {
+            "type": "editor",
+            "aceMode": "ace/mode/markdown",
+            "aceHeight": 300,
+            "aceFitContentHeight": false,
+            "label": "Body (markdown)",
+            "required": false
+        }
+    },
+    "_form_key": "master"
+}

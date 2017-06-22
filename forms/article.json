@@ -1,0 +1,42 @@
+{
+    "engineId": "alpaca1",
+    "title": "Category",
+    "fields": {
+        "title": {
+            "type": "text",
+            "label": "Title",
+            "required": true
+        },
+        "slug": {
+            "type": "slug",
+            "emptyOnly": true,
+            "label": "Slug / Alias",
+            "required": true
+        },
+        "leadParagraph": {
+            "type": "editor",
+            "aceMode": "ace/mode/markdown",
+            "aceHeight": 300,
+            "aceFitContentHeight": false,
+            "label": "Lead paragraph (markdown)",
+            "required": false
+        },
+        "body": {
+            "type": "editor",
+            "aceMode": "ace/mode/markdown",
+            "aceHeight": 300,
+            "aceFitContentHeight": false,
+            "label": "Body (markdown)",
+            "required": false
+        },
+        "category": {
+            "title": "Category",
+            "type": "object",
+            "_relator": {
+                "associationType": "a:category-association",
+                "nodeType": "custom:category"
+            }
+        }
+    },
+    "_form_key": "master"
+}

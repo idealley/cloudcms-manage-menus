@@ -1,0 +1,85 @@
+{
+    "title": "Menu",
+    "engineId": "alpaca1",
+    "description": "Form to create a menu",
+    "fields": {
+        "title": {
+            "type": "text",
+            "label": "Title",
+            "required": true
+        },
+        "slug": {
+            "type": "slug",
+            "emptyOnly": true,
+            "label": "Slug / Alias",
+            "required": true
+        },
+        "root": {
+            "type": "checkbox",
+            "rightLabel": "Check if creating a new menu",
+            "required": false
+        },
+        "parent": {
+            "type": "node-picker",
+            "label": "Parent menu item",
+            "required": false
+        },
+        "type": {
+            "type": "select",
+            "label": "Type (hidden menu do not appear in the menu but are availbe for people who know them, can be used as an alias",
+            "required": true,
+            "optionLabels": [
+                "visible",
+                "hidden"
+            ]
+        },
+        "ordering": {
+            "type": "select",
+            "label": "Order by",
+            "required": false,
+            "optionLabels": [
+                "Alphabetical",
+                "Reverse Alphabetical",
+                "Order"
+            ]
+        },
+        "order": {
+            "type": "text",
+            "label": "Enter the order number",
+            "required": false,
+            "dependencies": {
+                "ordering": "order"
+            }
+        },
+        "contentType": {
+            "type": "select",
+            "label": "Cartegory or article?",
+            "required": true,
+            "optionLabels": [
+                "article",
+                "category"
+            ]
+        },
+        "article": {
+            "type": "node-picker",
+            "label": "Article displayed by this menu item",
+            "required": false,
+            "dependencies": {
+                "contentType": [
+                    "article"
+                ]
+            }
+        },
+        "category": {
+            "type": "node-picker",
+            "label": "Category displayed by this menu item",
+            "required": false,
+            "dependencies": {
+                "contentType": [
+                    "category"
+                ]
+            }
+        }
+    },
+    "_form_key": "master"
+}

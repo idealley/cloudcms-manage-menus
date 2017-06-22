@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+div.list {
+    max-width: 40em;
+}
+
+p.did {
+    float: right;
+    font-size: smaller;
+    color: grey;
+}
+
+p.article {
+    padding: 0 0 0 1em;
+}

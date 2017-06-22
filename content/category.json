@@ -1,0 +1,6 @@
+{
+    "title": "A Category",
+    "slug": "a-category",
+    "body": "This is the body of the category. I am not very inspired, so I guess this is long enough",
+    "_type": "custom:category"
+}

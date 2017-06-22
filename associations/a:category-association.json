@@ -1,0 +1,10 @@
+{
+    "title": "Article Category Association",
+    "description": "Associates website content with a Category",
+    "_parent": "a:linked",
+    "type": "object",
+    "_type": "d:association",
+    "_qname": "a:category-association",
+    "properties": {},
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

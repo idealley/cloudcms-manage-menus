@@ -1,0 +1,17 @@
+
+extends layout
+
+block content
+    ul(style="padding:0;")
+        li(style="display:inline;") you are here:
+        - for(var i = 0; i < data.breadcrumb.length; i++){
+        li(style="display:inline;")
+        - var carret = i < data.breadcrumb.length -1 ? '>' : ''
+            span= ' '
+            a(href= data.breadcrumb[i].path)= data.breadcrumb[i].title 
+            span= carret
+        - }
+                
+    h1!= data.item[0].title
+    p= data.item[0].body
+

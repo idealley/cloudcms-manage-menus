@@ -1,0 +1,14 @@
+
+extends layout
+
+block content
+    h1!= "Enjoy the menu"
+    each node in menu.items
+      ul
+        li
+            a(href= node.path)= node.title
+        if node.children
+            each child in node.children
+                ul
+                    li
+                        a(href= child.path)= child.title

@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "_parent": "n:node",
+    "_type": "d:type",
+    "_qname": "custom:article", 
+    "description": "An Article / Blog post",
+    "properties": {
+        "title": {
+            "title": "Title",
+            "type": "string"
+        },
+        "slug": {
+            "title": "Slug / Alias",
+            "type": "string"
+        },
+        "leadParagraph": {
+            "title": "Lead Paragraph",
+            "type": "string"
+        },
+        "body": {
+            "title": "Body",
+            "type": "string"
+        },        
+        "category": {
+            "title": "Category",
+            "type": "object",
+            "_relator": {
+                "associationType": "a:category-association",
+                "nodeType": "custom:category"
+            }
+        }
+    },
+    "required": [
+        "title",
+        "slug"
+    ],
+    "title": "Article",
+    "type": "object"
+}
