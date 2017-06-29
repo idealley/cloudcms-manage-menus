@@ -58,8 +58,8 @@ const bindControllers = function(branch, app)
             r.menuItems(branch, data.item[0]._qname).then(data => {
                 res.data = data;
                 next()
-            }).catch(() => {});;
-        }).catch(() => {});;
+            }).catch(() => {});
+        }).catch(() => {});
     }, menuParser, (req, res, next) => {
             res.render('index', { menu: res.data });
             //res.json(res.data);
@@ -81,7 +81,7 @@ const bindControllers = function(branch, app)
                     }).catch(() => {});
                 } else {next();}    
 
-            }).catch(() => {});; 
+            }).catch(() => {});;
         }).catch(() => {});
     }, breadcrumbParser, (req, res, next) => {
         res.render('page', { data: res.data });
