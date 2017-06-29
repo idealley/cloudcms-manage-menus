@@ -99,15 +99,20 @@ const self = module.exports =  {
         const len = array.length;
         return array.map((i, k) => {
             let path = array.slice(0, k + 1);
-            i.path = path.map(i => `/${i.slug}/${i.childSlug}`).join('');
+            //Menu in path
+            //i.path = path.map(i => `/${i.slug}/${i.childSlug}`).join('');
+            i.path = path.map(i => `/${i.childSlug}`).join('');
             if(k + 1 == len){
                 i.article = {
                     tilte: item.title,
                     slug: item.slug,
-                    path:i.path + `/${item.slug}`
+                    //Menu in path
+                    //path: i.path + `/${item.slug}`
+                    path: i.path
                     
                 };
             }
+            console.log(i)
             return i;
         });
     },
@@ -117,17 +122,22 @@ const self = module.exports =  {
         return items.map(i => {
             const keys = Object.keys(i)
             if(keys.indexOf(i.contentType) !== -1){
-                    i.path = path + `/${i.slug}/${i[i.contentType].slug}`;
-                
+                    //Menu part of the url
+                    //i.path = path + `/${i.slug}/${i[i.contentType].slug}`;  
+                    // Menu not part of the url
+                    i.path = path + `/${i[i.contentType].slug}`;          
             }
 
             if(keys.indexOf('children') !== -1 ){
-                self.parse(i.children, i.path.split('/').slice(0, -1).join('/'));
+                // Menu part of the URL
+                // const p = i.path.split('/').slice(0, -1).join('/')
+                // Menu not part of the URL
+                const p = i.path;
+                self.parse(i.children, p);
                 if(keys.indexOf('ordering')){
                     i.children = self.sortBy(i.children, i.ordering)               
                 }
             }
-
             return i;
         });
     },

@@ -1,31 +1,14 @@
-/**
- * Hello World (Express)
- *
- * This Hello World example improves upon the basic Hello World project (in a different directory) by using Express
- * to host a simple web server application.  The web application offers three functions:
- *
- *    a) Create 3 content items
- *    b) Query for content items and display them
- *    c) Delete content items
- *
- * The purpose of this project is to get a better sense of the CRUD operations that Cloud CMS supports.  We can not
- * only query for content, but we can also create it, delete it and work with it in result sets.
- *
- * Jade is used as a templating engine and Express is kept in a pretty minimal configuration.
- *
- * See the README.md file for more information.
- */
 
 const express = require('express');
 const path = require('path');
 const gitana = require("gitana");
 
-const r = require('./lib/requests.js');
-const util = require('./lib/util.js');
+const r = require('./src/requests.js');
+const util = require('./src/util.js');
 
 // Loading Middlwares
-const menuParser = require('./middleware/menuParser.js');
-const breadcrumbParser = require('./middleware/breadcrumbParser.js');
+const menuParser = require('./src/middleware/menuParser.js');
+const breadcrumbParser = require('./src/middleware/breadcrumbParser.js');
 
 const app = express();
 
@@ -59,7 +42,7 @@ gitana.connect(function(err) {
             console.log("---------------------------------------------------------");
             console.log("Hello World (Express) is alive and kicking!");
             console.log("");
-            console.log("   To view sample menu, go to http://localhost:" + server.address().port + "/");
+            console.log("   To view the sample menu, go to http://localhost:" + server.address().port + "/main-menu");
             console.log("");
         });
 
@@ -70,10 +53,8 @@ gitana.connect(function(err) {
 const bindControllers = function(branch, app)
 {   
 
-    app.use(menuParser);
-    app.get('/:slug', (req, res, next) => {
-
-        r.item(branch, req.params.slug).then(data => {
+    app.get('/main-menu', (req, res, next) => {
+        r.item(branch, 'main-menu').then(data => {
             r.menuItems(branch, data.item[0]._qname).then(data => {
                 res.data = data;
                 next()
@@ -81,47 +62,32 @@ const bindControllers = function(branch, app)
         }).catch(() => {});;
     }, menuParser, (req, res, next) => {
             res.render('index', { menu: res.data });
-        });
+            //res.json(res.data);
+    });
 
-    app.get('/child-2/:slug', (req, res, next) => {
-        const slug = req.params.slug;
+
+    app.get('*', (req, res, next) => {
+        const slug = req.path.split('/').slice(-1)[0];
         r.item(branch, slug).then(data => {
             r.breadcrumb(branch, data.item[0]._qname).then(d => {
                 data.breadcrumb = d;
                 res.data = data;
-                next();
+
+                if(data.item[0]._statistics['a:category-association'] > 0){
+                    r.relatives(branch, data.item[0]._qname).then(d => {
+                        data.items = d;
+                        res.data = data;
+                        next();
+                    }).catch(() => {});
+                } else {next();}    
+
             }).catch(() => {});; 
         }).catch(() => {});
     }, breadcrumbParser, (req, res, next) => {
         res.render('page', { data: res.data });
         //res.json(res.data);
-    });
+    });    
 
-    app.get('/child-1/:slug', (req, res, next) => {
-        r.item(branch, req.params.slug).then(data => {
-            r.breadcrumb(branch, data.item[0]._qname).then(d => {
-                data.breadcrumb = d;
-                res.data = data;
-                next();
-            }).catch(() => {});      
-        }).catch(() => {});
-    }, breadcrumbParser, (req, res, next) => {
-        res.render('page', { data: res.data });
-        //res.json(res.data);
-    });
-
-    app.get('/child-1/child-of-child-1/:slug', (req, res, next) => {
-        r.item(branch, req.params.slug).then(data => {
-            r.breadcrumb(branch, data.item[0]._qname).then(d => {
-                data.breadcrumb = d;
-                res.data = data;
-                next();
-            }).catch(() => {});
-        }).catch(() => {});
-    }, breadcrumbParser, (req, res, next) => {
-        res.render('page', { data: res.data });
-        //res.json(res.data);
-    })
 
     // catch 404
     app.use((req, res, next) => {

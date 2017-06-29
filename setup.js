@@ -3,8 +3,8 @@ const clear       = require('clear');
 const CLI         = require('clui');
 const figlet      = require('figlet');
 const Spinner     = CLI.Spinner;
-const lib         = require('./lib');
-const prompt      = require('./lib/prompt.js')
+const lib         = require('./dist');
+const prompt      = require('./dist/prompt.js')
 
 clear();
 console.log(

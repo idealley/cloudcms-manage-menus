@@ -1,6 +1,6 @@
 'use strict'
 
-const util = require('../lib/util.js');
+const util = require('../util.js');
 
 module.exports = (req, res, next) => {
     if(Object.keys(res).indexOf('data') != -1){

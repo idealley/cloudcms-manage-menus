@@ -1,7 +1,7 @@
 'use strict'
 
 const inquirer    = require('inquirer');
-const lib         = require('../lib');
+const lib         = require('../src');
 const nodes       = require('./nodes.js')
 
 const self = module.exports = {

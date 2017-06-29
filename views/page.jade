@@ -15,3 +15,11 @@ block content
     h1!= data.item[0].title
     p= data.item[0].body
 
+    if data.item[0]._statistics['a:category-association_INCOMING'] > 0
+        - for(var i = 0; i < data.items.length; i++){
+        div(class="article")
+            h2=data.items[i].title
+            p=data.items[i].leadParagraph
+            a(href='/' + data.item[0].slug + '/' + data.items[i].slug) More...
+        - }    
+

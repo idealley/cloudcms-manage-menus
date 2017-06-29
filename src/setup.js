@@ -8,7 +8,7 @@ const Progress = CLI.Progress;
 
 
 module.exports = {
-    setup: (branch, nodes) => {
+    setup: (branch, nodes) => {    
         Chain(branch).then(function() {
             const branch = this;
             nodes.map((n, i) => {
