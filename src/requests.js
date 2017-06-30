@@ -121,7 +121,6 @@ module.exports = {
         skip: parseInt(skip) || 0,
         sort: { [sortBy]: sortDirection }
     };
-    console.log("options: ", opts)
 
     return new Promise((resolve, reject) => {
         branch

@@ -73,7 +73,7 @@ const bindControllers = function(branch, app)
                 data.breadcrumb = d;
                 res.data = data;
 
-                if(data.item[0]._statistics['a:category-association'] > 0){
+                if(data.item[0]._statistics['a:category-association_INCOMING'] > 0){
                     r.relatives(branch, data.item[0]._qname).then(d => {
                         data.items = d;
                         res.data = data;

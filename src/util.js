@@ -52,11 +52,11 @@ const self = module.exports =  {
         })
     },
 
-    toTreeChildren: (items, rootId) => {
+    childrenToTree: (items, rootId) => {
         let tree = [];
         items.map(i => {
             if(i.parent.id == rootId && i.type == 'visible') {
-                const children = self.toTreeChildren(items, i._doc)
+                const children = self.childrenToTree(items, i._doc)
                 if(children.length){
                     i.children = children
                 }
@@ -66,32 +66,31 @@ const self = module.exports =  {
         return tree;
     },
 
-    toTreeParent: (items, startId) => {
+    parentsToTree: (items, startId) => {
         let tree = []
         items.map(i => {
 
             if(i._doc == startId && !i.root) {
-                const parent = self.toTreeParent(items, i.parent.id)
+                const parent = self.parentsToTree(items, i.parent.id)
                 if(parent.length){
                     i.path = parent;
                 }
                 tree.push(i)
             }
         })
-
         return tree;
     },
 
     parseBreadcrumb: (path) => {
-        return path.reduce((acc, x, k, a) => {
-            const {title, slug} = x;
-            const childSlug = x[x.contentType].slug;
-            acc = acc.concat({title, slug, childSlug });
-            if (x.path) {
-                acc = acc.concat(self.parseBreadcrumb(x.path));
-                x.path = [];
+        return path.reduce((a, i) => {
+            const {title, slug} = i;
+            const childSlug = i[i.contentType].slug;
+            a = a.concat({title, slug, childSlug });
+            if (i.path) {
+                a = a.concat(self.parseBreadcrumb(i.path));
+                i.path = [];
             }
-            return acc;
+            return a;
         }, []);
     },
 
@@ -112,7 +111,6 @@ const self = module.exports =  {
                     
                 };
             }
-            console.log(i)
             return i;
         });
     },
