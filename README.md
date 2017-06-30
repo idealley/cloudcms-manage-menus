@@ -1,5 +1,5 @@
 # How to manage menus in cloudcms
-This turorial walks you trough the different steps to create a menu graph that is connected to your content graph:
+[This turorial](https://idealley.gitbooks.io/cloud-cms-how-to-manage-menus/content/) walks you trough the different steps to create a menu graph that is connected to your content graph:
 
 ## Aim
 * Manage menus
