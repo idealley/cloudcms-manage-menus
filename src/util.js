@@ -69,7 +69,6 @@ const self = module.exports =  {
     parentsToTree: (items, startId) => {
         let tree = []
         items.map(i => {
-
             if(i._doc == startId && !i.root) {
                 const parent = self.parentsToTree(items, i.parent.id)
                 if(parent.length){
@@ -84,7 +83,11 @@ const self = module.exports =  {
     parseBreadcrumb: (path) => {
         return path.reduce((a, i) => {
             const {title, slug} = i;
-            const childSlug = i[i.contentType].slug;
+            //this is not perfectly working for category that are not in the menu
+            let childSlug = '';
+            if(!i._stats['a:category-association_INCOMING']){
+                childSlug = i[i.contentType].slug;
+            }
             a = a.concat({title, slug, childSlug });
             if (i.path) {
                 a = a.concat(self.parseBreadcrumb(i.path));

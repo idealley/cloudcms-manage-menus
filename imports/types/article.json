@@ -26,7 +26,14 @@
             "type": "object",
             "_relator": {
                 "associationType": "a:category-association",
-                "nodeType": "custom:category"
+                "nodeType": "custom:category",
+                "mappings": [
+                    {               
+                        "from": "target",
+                        "fromProperty": "_doc",
+                        "toProperty": "parent_doc"
+                    }
+                ]
             }
         }
     },

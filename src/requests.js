@@ -67,6 +67,7 @@ module.exports = {
                 associations: {
                 'a:menu-association': 'INCOMING',
                 'a:parent-menu-association': 'OUTGOING'
+                ,'a:category-association': 'OUTGOING'
                 },
                 depth: 10,
                 types:['custom:menu']
@@ -97,54 +98,54 @@ module.exports = {
     },
 
     relatives: (branch, qname, options) => {
-    const { 
-        body = {}, 
-        sortDirection = -1, 
-        metadata = false,
-        full = false, 
-        sortBy = '_system.modified_on.ms', 
-        limit = 25, 
-        skip = 0 
-    } = options || {};
+        const { 
+            body = {}, 
+            sortDirection = -1, 
+            metadata = false,
+            full = false, 
+            sortBy = '_system.modified_on.ms', 
+            limit = 25, 
+            skip = 0 
+        } = options || {};
 
-    const b = Object.assign(body, {
-        unPublished: { $ne: true}
-    });
+        const b = Object.assign(body, {
+            unPublished: { $ne: true}
+        });
 
-    const config = {
-        type: 'a:category-association'
-    };
+        const config = {
+            type: 'a:category-association'
+        };
 
-    const opts = {
-        metadata: metadata || false,
-        limit: limit,
-        skip: parseInt(skip) || 0,
-        sort: { [sortBy]: sortDirection }
-    };
+        const opts = {
+            metadata: metadata || false,
+            limit: limit,
+            skip: parseInt(skip) || 0,
+            sort: { [sortBy]: sortDirection }
+        };
 
-    return new Promise((resolve, reject) => {
-        branch
-            .trap(function(e){
-                resolve({message:e.message, status: e.status});
-            })
-            .then(function(){
-            const node = this.readNode(qname);
-            node.then(function(){
-                const nodes = this.subchain(node).queryRelatives(b, config, opts);
-                nodes.each(function(){
-                    this._system = this.getSystemMetadata();
-                    if(full){
-                    this._statistics = this.__stats();
-                    this._qname = this.__qname();
-                    }
+        return new Promise((resolve, reject) => {
+            branch
+                .trap(function(e){
+                    resolve({message:e.message, status: e.status});
                 })
                 .then(function(){
-                    const total = nodes.__totalRows();
-                    const relatives = JSON.parse(JSON.stringify(nodes.asArray()));
-                    resolve(relatives);
+                const node = this.readNode(qname);
+                node.then(function(){
+                    const nodes = this.subchain(node).queryRelatives(b, config, opts);
+                    nodes.each(function(){
+                        this._system = this.getSystemMetadata();
+                        if(full){
+                        this._statistics = this.__stats();
+                        this._qname = this.__qname();
+                        }
+                    })
+                    .then(function(){
+                        const total = nodes.__totalRows();
+                        const relatives = JSON.parse(JSON.stringify(nodes.asArray()));
+                        resolve(relatives);
+                    });
                 });
             });
-        });
-    });      
-}
+        });      
+    }
 }
