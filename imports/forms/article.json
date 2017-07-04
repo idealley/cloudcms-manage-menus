@@ -1,6 +1,6 @@
 {
     "engineId": "alpaca1",
-    "title": "Category",
+    "title": "Article",
     "fields": {
         "title": {
             "type": "text",
