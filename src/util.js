@@ -89,10 +89,11 @@ const self = module.exports =  {
                 childSlug = i[i.contentType].slug;
             }
             a = a.concat({title, slug, childSlug });
-            if (i.path) {
+            if (i.path && !i._stats['a:category-association_INCOMING']) {
                 a = a.concat(self.parseBreadcrumb(i.path));
                 i.path = [];
             }
+            console.log(!i._stats['a:category-association_INCOMING'])
             return a;
         }, []);
     },
