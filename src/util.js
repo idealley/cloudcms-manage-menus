@@ -93,7 +93,6 @@ const self = module.exports =  {
                 a = a.concat(self.parseBreadcrumb(i.path));
                 i.path = [];
             }
-            console.log(!i._stats['a:category-association_INCOMING'])
             return a;
         }, []);
     },
