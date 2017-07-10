@@ -83,7 +83,6 @@ const self = module.exports =  {
     parseBreadcrumb: (path) => {
         return path.reduce((a, i) => {
             const {title, slug} = i;
-            //this is not perfectly working for category that are not in the menu
             let childSlug = '';
             if(!i._stats['a:category-association_INCOMING']){
                 childSlug = i[i.contentType].slug;
@@ -104,16 +103,16 @@ const self = module.exports =  {
             //Menu in path
             //i.path = path.map(i => `/${i.slug}/${i.childSlug}`).join('');
             i.path = path.map(i => `/${i.childSlug}`).join('');
-            if(k + 1 == len){
-                i.article = {
-                    tilte: item.title,
-                    slug: item.slug,
-                    //Menu in path
-                    //path: i.path + `/${item.slug}`
-                    path: i.path
+            // if(k + 1 == len){
+            //     i.article = {
+            //         tilte: item.title,
+            //         slug: item.slug,
+            //         //Menu in path
+            //         //path: i.path + `/${item.slug}`
+            //         path: i.path
                     
-                };
-            }
+            //     };
+            // }
             return i;
         });
     },
