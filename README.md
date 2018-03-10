@@ -1,4 +1,6 @@
 # How to manage menus in cloudcms
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/idealley/cloudcms-manage-menus.svg)](https://greenkeeper.io/)
 [This tutorial](https://idealley.gitbooks.io/cloud-cms-how-to-manage-menus/content/) walks you trough the different steps to create a menu graph that is connected to your content graph:
 
 ## Aim
